@@ -6,7 +6,8 @@ Typst templates for UNSA Software Engineering laboratory reports.
 
 | Template | Description |
 |----------|-------------|
-| [lab](./lab/) | Standard laboratory report template with single and multi-lab support |
+| [lab](./lab/) | Single laboratory report template |
+| [multi-lab](./multi-lab/) | Multi-laboratory report template (multiple sessions in one repo) |
 
 ## Installation
 
@@ -16,6 +17,7 @@ unsarep install
 
 # Install a specific template
 unsarep install lab
+unsarep install multi-lab
 ```
 
 ## Usage
@@ -42,7 +44,7 @@ Creates a single-lab project structure:
 For repositories containing multiple laboratory sessions:
 
 ```bash
-unsarep install lab --multi
+unsarep install multi-lab
 ```
 
 Creates a multi-lab project structure:
@@ -61,13 +63,13 @@ Creates a multi-lab project structure:
 ### Adding Sessions
 
 ```bash
-unsarep install --session l3
+unsarep install multi-lab --session l3
 ```
 
 ## Template Structure
 
 Each template contains:
-- `manifest.json` - File manifest defining what gets installed
+- `manifest.json` - File manifest defining mode and entries
 - `lib.typ` - Main Typst library with report components
 - `report.typ` - Report template
 - `sections/` - Report section templates
@@ -78,23 +80,34 @@ Each template contains:
 ### Creating a New Template
 
 1. Create a new directory under `templates/`
-2. Add a `manifest.json` defining the file structure
+2. Add a `manifest.json` defining the mode and entries
 3. Create the Typst template files
 4. Test with `unsarep install <template-name>`
 
 ### Manifest Format
 
+**Single-mode template:**
 ```json
 {
-  "common": [
-    { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true }
-  ],
-  "single": [
+  "mode": "single",
+  "entries": [
+    { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true },
     { "kind": "file", "src": "report.typ", "dest": "report.typ" }
-  ],
-  "multi": {
-    "root": [],
-    "labFiles": []
+  ]
+}
+```
+
+**Multi-mode template:**
+```json
+{
+  "mode": "multi",
+  "entries": {
+    "root": [
+      { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true }
+    ],
+    "labFiles": [
+      { "kind": "file", "src": "report.typ", "dest": "{lab}/report.typ" }
+    ]
   }
 }
 ```

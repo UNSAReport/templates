@@ -75,7 +75,7 @@ You are also strongly advised to follow the snippets/ and src/ conventions. All 
 
 Add a new lab session:
 ```bash
-unsarep install --session l2
+unsarep install multi-lab --session l2
 ```
 
 Update the template files across all registered sessions or for a specific session:
