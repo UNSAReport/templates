@@ -1,0 +1,21 @@
+{
+  "mode": "multi",
+  "entries": {
+    "root": [
+      { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true },
+      { "kind": "file", "src": "flake.nix", "dest": "flake.nix" },
+      { "kind": "file", "src": "functions.typ", "dest": "functions.typ", "updatable": true },
+      { "kind": "dir", "src": "img/fixed", "dest": "img/fixed", "updatable": true },
+      { "kind": "file", "src": "README.md", "dest": "README.md" }
+    ],
+    "labFiles": [
+      { "kind": "file", "src": "report.typ", "dest": "{lab}/report.typ" },
+      { "kind": "file", "src": "bibliography.bib", "dest": "{lab}/bibliography.bib" },
+      { "kind": "dir", "src": "img/lab", "dest": "{lab}/img/lab", "updatable": true },
+      { "kind": "dir", "src": "snippets", "dest": "{lab}/snippets", "updatable": true },
+      { "kind": "dir", "src": "src", "dest": "{lab}/src", "updatable": true },
+      { "kind": "dir", "src": "guide", "dest": "{lab}/guide", "updatable": true },
+      { "kind": "dir", "src": "sections", "dest": "{lab}/sections", "updatable": true }
+    ]
+  }
+}
