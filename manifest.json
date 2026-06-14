@@ -1,0 +1,14 @@
+{
+  "templates": [
+    {
+      "name": "lab",
+      "description": "One to one replica of the default UNSA lab report template - for a single lab report",
+      "path": "lab"
+    },
+    {
+      "name": "multi-lab",
+      "description": "One to one replica of the default UNSA lab report template - to have all your lab reports under the same directory",
+      "path": "multi-lab"
+    }
+  ]
+}
