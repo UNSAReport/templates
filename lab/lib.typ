@@ -2,6 +2,10 @@
 #let header-border-color = rgb("#808080")
 #let tb-header-bg-color = rgb("#C8310E")
 #let code-bg-color = rgb("#F1F3F4")
+#let tb-section-bg-color = rgb("#C0C0C0")
+#let tb-header-text-color = white
+#let tb-body-text-size = 8.5pt
+#let tb-header-text-size = 9pt
 
 #let define(name, value) = {
   [#metadata((name: name, value: value)) <var_export>]
@@ -75,6 +79,41 @@
     }
     new
   })
+}
+
+#let lab-table-state = state(
+  "lab-table-config",
+  (
+    stroke: table-border-width + black,
+    header-fill: header-border-color,
+    section-fill: tb-section-bg-color,
+    header-text-color: tb-header-text-color,
+    header-weight: "bold",
+    header-align: center + horizon,
+    body-align: left + horizon,
+    inset: 0.5em,
+    body-text-size: tb-body-text-size,
+    header-text-size: tb-header-text-size,
+  ),
+)
+
+#let lab-table-config(..args) = {
+  lab-table-state.update(old => {
+    let new = old
+    for (key, value) in args.named() {
+      new.insert(key, value)
+    }
+    new
+  })
+}
+
+#let tableContents(
+  weight: "regular",
+  alignTo: left,
+  color: black,
+  body,
+) = {
+  text(weight: weight, fill: color, align(alignTo, body))
 }
 
 #let extract-named-snippet(source, file, snippet-name, prefix) = {
@@ -186,6 +225,71 @@
       #set text(size: 8.5pt)
       #body
     ],
+  )
+}
+
+#let lab-table(
+  columns: (1fr,),
+  header: none,
+  rows: (),
+  sections: (),
+  align: none,
+) = context {
+  let cfg = lab-table-state.get()
+  let body-align = if align != none { align } else { cfg.body-align }
+  let ncols = columns.len()
+
+  for (i, row) in rows.enumerate() {
+    let display-i = if header != none { i + 1 } else { i }
+    if row.len() != ncols {
+      let msg = (
+        "lab-table: row "
+          + str(display-i)
+          + " has "
+          + str(row.len())
+          + " cells, expected "
+          + str(ncols)
+          + " (continuing)"
+      )
+      [#metadata(msg) <lab_table_warn>]
+    }
+  }
+
+  let header-cells = if header != none {
+    header.map(h => table.cell(
+      fill: cfg.header-fill,
+      tableContents(
+        weight: cfg.header-weight,
+        alignTo: center,
+        color: cfg.header-text-color,
+      )[#h],
+    ))
+  } else { () }
+
+  let body-cells = ()
+  let section-idx = sections.map(s => s.at(0))
+  for (i, row) in rows.enumerate() {
+    let display-i = if header != none { i + 1 } else { i }
+    if section-idx.contains(display-i) {
+      let sec = sections.find(s => s.at(0) == display-i)
+      body-cells.push(table.cell(
+        colspan: sec.at(1),
+        fill: cfg.section-fill,
+        tableContents(weight: cfg.header-weight, alignTo: center)[#sec.at(2)],
+      ))
+    }
+    for cell in row {
+      body-cells.push(table.cell(tableContents[#cell]))
+    }
+  }
+
+  table(
+    align: body-align,
+    stroke: cfg.stroke,
+    inset: cfg.inset,
+    columns: columns,
+    ..header-cells,
+    ..body-cells,
   )
 }
 
@@ -323,9 +427,7 @@
   // Derived vars export
   let course_abbr = abbreviate-by-caps(course_name)
   let shortnames_chain = members.map(name => summarize-name(name)).join("_")
-  let surnames_chain = members
-    .map(name => summarize-name(name, positions: (0,), separator: ""))
-    .join("-")
+  let surnames_chain = members.map(name => summarize-name(name, positions: (0,), separator: "")).join("-")
   let wide_lab_number = numbering("001", int(lab_number))
 
   define("course_abbr", course_abbr)
