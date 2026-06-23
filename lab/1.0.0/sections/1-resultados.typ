@@ -1,4 +1,4 @@
-#import "../lib.typ": lab-section
+#import "../components/lab-section.typ": lab-section
 
 #lab-section(title: "RESULTADOS Y PRUEBAS")[
   #show heading: set text(weight: "bold")

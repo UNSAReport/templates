@@ -1,4 +1,5 @@
-#import "lib.typ": code-block, code-block-config, unsa-report
+#import "lib.typ": unsa-report
+#import "components/code-block.typ": code-block
 
 #show: unsa-report.with(
   course_name: "Ingeniería de Software",
@@ -11,9 +12,6 @@
     "Apellidos3 Apellidos3 Nombres3 Nombres3",
   ),
 )
-
-// Configure components
-#code-block-config(lang: "python", prefix: "#")
 
 #set image(width: 78%)
 #set list(indent: 2pt)

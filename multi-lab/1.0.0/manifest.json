@@ -1,6 +1,12 @@
 {
   "version": "0.0.1",
   "mode": "multi",
+  "components": {
+    "code-block": "^1.0.0",
+    "lab-section": "^1.0.0",
+    "page-header": "^1.0.0",
+    "basic-info-table": "^1.0.0"
+  },
   "entries": {
     "root": [
       { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true },
