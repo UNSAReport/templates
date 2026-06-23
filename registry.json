@@ -21,6 +21,28 @@
           "path": "templates/multi-lab/1.0.0"
         }
       }
+    },
+    "simple-report": {
+      "description": "Clean simple academic report template with a customizable cover page - for a single report",
+      "dist-tags": {
+        "latest": "1.0.0"
+      },
+      "versions": {
+        "1.0.0": {
+          "path": "templates/simple-report/1.0.0"
+        }
+      }
+    },
+    "multi-simple-report": {
+      "description": "Clean simple academic report template with a customizable cover page - to have multiple reports under the same directory",
+      "dist-tags": {
+        "latest": "1.0.0"
+      },
+      "versions": {
+        "1.0.0": {
+          "path": "templates/multi-simple-report/1.0.0"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,17 @@
+{
+  "mode": "single",
+  "components": {
+    "cover-page": "^1.0.0",
+    "code-block": "^1.0.0"
+  },
+  "entries": [
+    { "kind": "file", "src": "lib.typ", "dest": "lib.typ", "updatable": true },
+    { "kind": "file", "src": "flake.nix", "dest": "flake.nix" },
+    { "kind": "file", "src": "README.md", "dest": "README.md" },
+    { "kind": "file", "src": "functions.typ", "dest": "functions.typ", "updatable": true },
+    { "kind": "dir", "src": "img/fixed", "dest": "img/fixed", "updatable": true },
+    { "kind": "file", "src": "report.typ", "dest": "report.typ" },
+    { "kind": "file", "src": "bibliography.bib", "dest": "bibliography.bib" },
+    { "kind": "dir", "src": "sections", "dest": "sections", "updatable": true }
+  ]
+}
