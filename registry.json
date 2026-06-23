@@ -1,10 +1,7 @@
 {
-  "version": "1.0.0",
   "templates": {
     "lab": {
       "description": "One to one replica of the default UNSA lab report template - for a single lab report",
-      "repo": "UNSAReport/templates",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
@@ -16,8 +13,6 @@
     },
     "multi-lab": {
       "description": "One to one replica of the default UNSA lab report template - to have all your lab reports under the same directory",
-      "repo": "UNSAReport/templates",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
